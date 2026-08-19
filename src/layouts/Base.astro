@@ -1,0 +1,147 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Anh Pham. Product person, book translator, runner.' } = Astro.props;
+
+const nav = [
+  { href: '/work/', label: 'Work' },
+  { href: '/writing/', label: 'Writing' },
+  { href: '/hobbies/', label: 'Hobbies' },
+  { href: '/about/', label: 'About' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <!-- noindex until launch (Phase 5) -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <header class="shell">
+      <a class="wordmark" href="/">Anh Pham</a>
+      <nav aria-label="Main">
+        {nav.map((item) => (
+          <a href={item.href} aria-current={current.startsWith(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <main class="shell">
+      <slot />
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <p class="label">Say hello</p>
+        <p class="contact">
+          <a href="#" data-contact>email</a>
+          <a href="https://www.linkedin.com/" rel="me noopener">LinkedIn</a>
+          <a href="#" title="Ko-fi link coming once the account exists">buy me a coffee</a>
+        </p>
+        <p class="small muted">Anh Pham. Built by hand, published from a folder of text files.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Assemble the mailto on the client so the address is not scrapable from raw HTML.
+      const el = document.querySelector('[data-contact]');
+      if (el instanceof HTMLAnchorElement) {
+        const user = 'anhpham.workcom';
+        const host = 'gmail.com';
+        el.href = 'mailto:' + user + '@' + host;
+        el.textContent = user + '@' + host;
+      }
+    </script>
+
+    <style>
+      header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding-block: 2rem;
+      }
+
+      .wordmark {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 1.2rem;
+        text-decoration: none;
+      }
+
+      .wordmark:hover {
+        background: none;
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+      }
+
+      nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      nav a {
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+
+      nav a:hover {
+        background: none;
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.25em;
+      }
+
+      nav a[aria-current='page'] {
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.25em;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      footer {
+        margin-top: 6rem;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .footer-inner {
+        padding-block: 2.5rem 3rem;
+      }
+
+      .contact {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-block: 0.75rem 1.5rem;
+      }
+
+      .small {
+        font-size: 0.85rem;
+      }
+    </style>
+  </body>
+</html>

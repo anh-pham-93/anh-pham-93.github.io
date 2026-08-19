@@ -1,0 +1,91 @@
+---
+// Temporary page for the Vietnamese diacritics font test. Deleted before launch.
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/newsreader';
+import '@fontsource-variable/inter';
+import '@fontsource/be-vietnam-pro';
+import '@fontsource/be-vietnam-pro/500.css';
+
+const testVN = 'Tiếng Việt: ế ộ ữ ơ đ Nguyễn, người dịch sách';
+const testEN = 'A quiet page about work, words, and long runs';
+const bodyMix =
+  'I translate books from English to Vietnamese. Cuốn gần nhất là Killers of the Flower Moon, một cuốn khó dịch vì giọng văn tường thuật lạnh và chính xác. Stacked diacritics test: ế ề ể ễ ệ ố ồ ổ ỗ ộ ứ ừ ử ữ ự đ Đ.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Font test</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 3rem 2rem;
+        background: #ffffff;
+        color: #111111;
+        max-width: 720px;
+        margin-inline: auto;
+      }
+      section {
+        border-bottom: 1px solid #e5e5e5;
+        padding-block: 2rem;
+      }
+      .label {
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 1rem;
+      }
+      h2 { margin: 0 0 0.75rem; font-weight: 500; }
+      .s1 { font-size: 3rem; line-height: 1.15; }
+      .s2 { font-size: 2rem; line-height: 1.2; }
+      .s3 { font-size: 1.25rem; line-height: 1.3; }
+      p { font-size: 1.0625rem; line-height: 1.65; margin: 0 0 1rem; }
+      .fraunces { font-family: 'Fraunces Variable', serif; }
+      .newsreader { font-family: 'Newsreader Variable', serif; }
+      .inter { font-family: 'Inter Variable', sans-serif; }
+      .bvp { font-family: 'Be Vietnam Pro', sans-serif; }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="label">Fraunces (headings candidate 1)</div>
+      <h2 class="fraunces s1">{testVN}</h2>
+      <h2 class="fraunces s2">{testEN}</h2>
+      <h2 class="fraunces s3">{testVN}</h2>
+    </section>
+
+    <section>
+      <div class="label">Newsreader (headings candidate 2)</div>
+      <h2 class="newsreader s1">{testVN}</h2>
+      <h2 class="newsreader s2">{testEN}</h2>
+      <h2 class="newsreader s3">{testVN}</h2>
+    </section>
+
+    <section>
+      <div class="label">Inter (body candidate 1)</div>
+      <p class="inter">{bodyMix}</p>
+    </section>
+
+    <section>
+      <div class="label">Be Vietnam Pro (body candidate 2)</div>
+      <p class="bvp">{bodyMix}</p>
+    </section>
+
+    <section>
+      <div class="label">Pairing A: Fraunces + Inter</div>
+      <h2 class="fraunces s2">Chín cuốn sách đã dịch, và một nghề sản phẩm</h2>
+      <p class="inter">{bodyMix}</p>
+    </section>
+
+    <section>
+      <div class="label">Pairing B: Newsreader + Be Vietnam Pro</div>
+      <h2 class="newsreader s2">Chín cuốn sách đã dịch, và một nghề sản phẩm</h2>
+      <p class="bvp">{bodyMix}</p>
+    </section>
+  </body>
+</html>

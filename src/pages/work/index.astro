@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Timeline facts come from the resume. Case studies are placeholders until Phase 4.
+const caseStudies = [
+  {
+    title: '[Placeholder] Case study one',
+    summary: 'One paragraph on the problem, the approach, and the outcome. Written in Phase 4.',
+    meta: 'Lumin Sign',
+  },
+  {
+    title: '[Placeholder] Case study two',
+    summary: 'One paragraph on the problem, the approach, and the outcome. Written in Phase 4.',
+    meta: 'Lumin Sign',
+  },
+];
+
+const timeline = [
+  {
+    period: '2022 to now',
+    role: 'Senior Product Owner, Lumin',
+    note: 'E-signature SaaS plus an emerging identity verification and digital credentials line. Agreement volume grew 10x to over 200,000.',
+  },
+  {
+    period: '2020 to 2022',
+    role: 'Product Requirements & Compliance Specialist, Ikano Retail (IKEA Southeast Asia)',
+    note: 'Localisation, regulation, and range decisions for 7,200 products entering the Vietnam market.',
+  },
+  {
+    period: '2018 to 2020',
+    role: 'Associate Technical Professional, Halliburton',
+    note: '20 offshore equipment projects delivered, each USD 800K to 1.2M, zero safety incidents.',
+  },
+  {
+    period: '2017 to 2018',
+    role: 'Business Developer, Tokyo Gas (Vietnam Representative Office)',
+    note: 'Market research and stakeholder work that led to MOUs with PV Gas and PV Power.',
+  },
+];
+---
+
+<Base title="Work | Anh Pham">
+  <div class="page">
+    <h1>Work</h1>
+    <p class="lede">
+      Nearly a decade across energy, retail, and software. The common thread: take something
+      complicated, make the calls, ship it.
+    </p>
+
+    <section class="section">
+      <span class="label">Case studies</span>
+      <ul class="rows">
+        {caseStudies.map((cs) => (
+          <li>
+            <span class="label">{cs.meta}</span>
+            <h3><a href="#">{cs.title}</a></h3>
+            <p class="muted">{cs.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="section">
+      <span class="label">The whole story</span>
+      <ul class="rows">
+        {timeline.map((t) => (
+          <li class="timeline-row">
+            <span class="period label">{t.period}</span>
+            <div>
+              <h3>{t.role}</h3>
+              <p class="muted">{t.note}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .lede {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1.5rem;
+  }
+
+  .period {
+    padding-top: 0.35rem;
+  }
+
+  h3 {
+    margin-bottom: 0.25em;
+  }
+
+  h3 a {
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    background: none;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .timeline-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

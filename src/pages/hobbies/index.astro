@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Two books are confirmed; the rest of the list arrives in the Phase 3 content interview.
+const books = [
+  { title: '[Vietnamese title]', original: 'Killers of the Flower Moon', publisher: 'SaigonBooks', year: '' },
+  { title: '[Vietnamese title]', original: 'The Intelligence Trap', publisher: 'SaigonBooks', year: '' },
+  { title: '[Placeholder] Seven more books', original: 'Full list coming in Phase 3', publisher: '', year: '' },
+];
+
+const reviews = [
+  {
+    title: '[Placeholder] A book worth recommending',
+    verdict: 'Read it',
+    summary: 'Reviews are short and honest: what the book does well, who it is for.',
+  },
+];
+---
+
+<Base title="Hobbies | Anh Pham">
+  <div class="page">
+    <h1>Off hours</h1>
+    <p class="lede">
+      The things I do when I'm not doing product work. Each gets its own corner here, and the list
+      will grow.
+    </p>
+
+    <section class="section" id="translation">
+      <span class="label">Translation</span>
+      <h2>Nine books, and counting</h2>
+      <p>
+        I've translated nine published books from English to Vietnamese for SaigonBooks, and
+        volunteered as a Language Coordinator for the TED Open Translation Project since 2016. By
+        2020, Vietnamese was the third most-watched language on TED.
+      </p>
+      <ul class="rows">
+        {books.map((b) => (
+          <li class="book-row">
+            <div>
+              <h3>{b.title}</h3>
+              <p class="muted">{b.original}{b.publisher && ` · ${b.publisher}`}{b.year && ` · ${b.year}`}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="section" id="reading">
+      <span class="label">Reading</span>
+      <h2>Books I'd hand you</h2>
+      <p>Short reviews of books worth your time, and the occasional warning about ones that aren't.</p>
+      <ul class="rows">
+        {reviews.map((r) => (
+          <li>
+            <span class="label">{r.verdict}</span>
+            <h3>{r.title}</h3>
+            <p class="muted">{r.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="section" id="running">
+      <span class="label">Running</span>
+      <h2>Slow kilometres</h2>
+      <p>
+        [Placeholder] A few lines about running: where, how often, and what it does for the rest of
+        the week. Written in Phase 3.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .lede {
+    font-size: 1.25rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  h3 {
+    margin-bottom: 0.25em;
+  }
+</style>

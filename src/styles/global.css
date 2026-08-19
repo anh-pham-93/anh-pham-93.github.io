@@ -1,0 +1,144 @@
+/* Design tokens and base styles. The rules behind these values live in DESIGN.md. */
+
+:root {
+  --bg: #ffffff;
+  --ink: #111111;
+  --ink-soft: #575757;
+  --hairline: #e5e5e5;
+  --accent: #ffc700;
+  --accent-wash: #fff3c4;
+
+  --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --measure: 42rem; /* ~680px reading width */
+  --shell: 66rem;   /* outer shell */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 106.25%; /* 17px base */
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 540;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.25rem; }
+
+p {
+  margin: 0 0 1em;
+  max-width: var(--measure);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  background: var(--accent-wash);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Shared pieces --- */
+
+.shell {
+  width: min(var(--shell), 100% - 3rem);
+  margin-inline: auto;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-soft);
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+/* Arrow links that close each section ("per-section CTA" rule) */
+.cta {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  margin-top: 0.75rem;
+}
+
+/* Editorial list rows: hairline-separated, no boxes */
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rows > li {
+  border-top: 1px solid var(--hairline);
+  padding-block: 1.5rem;
+}
+
+.rows > li:last-child {
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Page-level rhythm */
+.page {
+  padding-block: 4rem 6rem;
+}
+
+.section {
+  margin-top: 5rem;
+}
+
+.section > .label {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  .page {
+    padding-block: 2.5rem 4rem;
+  }
+
+  .section {
+    margin-top: 3.5rem;
+  }
+}
