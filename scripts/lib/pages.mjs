@@ -16,7 +16,7 @@ function aboutPage() {
           <p class="hero-summary">I turn complex product and data problems into clear decisions, useful systems and work that teams can actually ship.</p>
           <div class="hero-actions">
             <a class="button" href="#about-intro">Get to know me <span aria-hidden="true">&darr;</span></a>
-            <span class="hero-start">${escapeHtml(role.area)} &middot; ${escapeHtml(role.status.toLowerCase())}</span>
+            <span class="hero-start">${escapeHtml(role.area)} &middot; ${escapeHtml(role.status)}</span>
           </div>
         </div>
         <a class="scroll-cue" href="#about-intro"><span aria-hidden="true">&darr;</span><span>Scroll to explore</span></a>
