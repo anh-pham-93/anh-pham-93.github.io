@@ -1,0 +1,170 @@
+    /* About: the picture barely moves; the copy travels much farther. */
+    .parallax-stage {
+      --hero-progress: 0;
+      position: relative;
+      height: 164svh;
+      color: var(--white);
+      background: #0b0b0a;
+    }
+    .parallax-sticky {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      overflow: clip;
+      isolation: isolate;
+    }
+    .parallax-media,
+    .parallax-shade,
+    .parallax-noise { position: absolute; inset: 0; }
+    .parallax-media {
+      inset: -8vh -2vw;
+      will-change: transform;
+      transform: translate3d(0, calc(var(--hero-progress) * -5.5vh), 0) scale(calc(1.07 + var(--hero-progress) * .025));
+    }
+    .parallax-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 51%;
+      filter: grayscale(1) contrast(1.12) brightness(.73);
+    }
+    .parallax-shade {
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(5,5,4,.80) 0%, rgba(5,5,4,.55) 35%, rgba(5,5,4,.11) 70%, rgba(5,5,4,.18) 100%),
+        linear-gradient(0deg, rgba(5,5,4,.45) 0%, transparent 52%, rgba(5,5,4,.14) 100%);
+    }
+    .parallax-noise {
+      z-index: 2;
+      opacity: .12;
+      mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 3;
+      width: var(--shell);
+      height: 100%;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 46px;
+      will-change: transform, opacity;
+      transform: translate3d(0, calc(var(--hero-progress) * -34vh), 0);
+      opacity: calc(1 - var(--hero-progress) * 1.18);
+    }
+    .hero-copy h1 {
+      max-width: 800px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(72px, 9vw, 142px);
+      font-weight: 430;
+      line-height: .84;
+      letter-spacing: -.066em;
+    }
+    .hero-role {
+      margin: 28px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(23px, 2.25vw, 35px);
+      line-height: 1.25;
+    }
+    .hero-role em { color: var(--accent-soft); font-style: normal; }
+    .hero-summary {
+      max-width: 620px;
+      margin: 20px 0 0;
+      color: rgba(255,255,255,.84);
+      font-size: 17px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 30px;
+    }
+    .hero-actions .button { color: var(--ink); background: var(--white); border-color: var(--white); }
+    .hero-start { color: rgba(255,255,255,.72); font-size: 13px; }
+    .scroll-cue {
+      position: absolute;
+      z-index: 4;
+      left: max(24px, calc((100vw - min(1180px, calc(100vw - 48px))) / 2));
+      bottom: 31px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255, calc(.80 - var(--hero-progress)));
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: .06em;
+      transform: translateY(calc(var(--hero-progress) * 60px));
+    }
+    .scroll-cue span:first-child {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 99px;
+    }
+    .about-sheet {
+      position: relative;
+      z-index: 5;
+      margin-top: -1px;
+      color: var(--ink);
+      background: var(--paper);
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -18px 60px rgba(0,0,0,.14);
+    }
+    .about-section { padding: clamp(80px, 9vw, 126px) 0; border-bottom: 1px solid var(--rule); }
+    .about-lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+      gap: clamp(50px, 9vw, 130px);
+      align-items: start;
+    }
+    .about-heading {
+      margin: 14px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(48px, 6.2vw, 88px);
+      font-weight: 430;
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+    .about-copy p { max-width: 710px; margin: 0 0 22px; color: var(--muted); }
+    .about-copy .lead {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height: 1.18;
+      letter-spacing: -.025em;
+    }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 68px;
+      border: 1px solid var(--rule);
+      background: rgba(255,255,255,.18);
+    }
+    .fact { min-height: 170px; padding: 24px; border-right: 1px solid var(--rule); }
+    .fact:last-child { border-right: 0; }
+    .fact strong { display: block; font-family: var(--serif); font-size: 23px; font-weight: 520; line-height: 1.15; }
+    .fact p { margin: 11px 0 0; color: var(--muted); font-size: 14px; }
+    .link-panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 52px; }
+    .link-panel {
+      position: relative;
+      min-height: 250px;
+      padding: 28px;
+      color: var(--ink);
+      background: var(--paper-bright);
+      border: 1px solid var(--rule);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .link-panel:hover { transform: translateY(-4px); border-color: var(--ink); box-shadow: var(--shadow); }
+    .link-panel .symbol { color: var(--accent); font-size: 28px; }
+    .link-panel h3 { margin: 62px 0 8px; font-family: var(--serif); font-size: 31px; font-weight: 520; }
+    .link-panel p { margin: 0; color: var(--muted); }
+    .link-panel .arrow { position: absolute; right: 26px; bottom: 22px; color: var(--accent); font-size: 24px; }
+
