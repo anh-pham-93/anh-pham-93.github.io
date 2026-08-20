@@ -36,7 +36,7 @@ function aboutPage() {
               <p>Outside work, I translate books from English to Vietnamese, read, run, and keep finding new interests to add to the list.</p>
               <div class="hero-actions">
                 <a class="button" href="${url('/work/')}">See my work <span aria-hidden="true">&rarr;</span></a>
-                <a class="text-link" href="mailto:${escapeHtml(site.email)}">Say hello <span aria-hidden="true">&nearr;</span></a>
+                <a class="text-link" href="${url('/contact/')}">Say hello <span aria-hidden="true">&rarr;</span></a>
               </div>
             </div>
           </div>
@@ -152,19 +152,71 @@ function hobbiesPage(hobbies) {
 }
 
 function contactPage() {
+  const contactEmail = site.contactEmail || site.email;
+  const contactFormEndpoint = String(site.contactFormEndpoint || '').trim();
+  const contactFormAction = contactFormEndpoint || `mailto:${contactEmail}`;
+  const contactFormEncoding = contactFormEndpoint ? '' : ' enctype="text/plain"';
+  const contactSubmitLabel = 'Send note';
+  const contactFormSubject = site.contactFormSubject || 'New message from anhpham.me - {{ name }}';
   const content = `
   <main id="main-content" class="inner-main">
-    <section class="contact-layout">
-      <div class="contact-copy"><p class="section-number">05 / Contact</p><h1>Say hello.</h1><p>Email is the easiest way to reach me. You can also find me on LinkedIn - or leave a small coffee-shaped thank you if something here was useful.</p>
-        <div class="contact-links">
-          <a href="mailto:${escapeHtml(site.email)}"><span>Email</span><span>${escapeHtml(site.email)} &nearr;</span></a>
-          <a href="${escapeHtml(site.linkedin)}" target="_blank" rel="noreferrer"><span>LinkedIn</span><span>Open profile &nearr;</span></a>
-          ${site.coffeeUrl
-            ? `<a href="${escapeHtml(site.coffeeUrl)}" target="_blank" rel="noreferrer"><span>${escapeHtml(site.coffeeLabel)}</span><span>&#9749;</span></a>`
-            : `<button type="button" data-coffee><span>${escapeHtml(site.coffeeLabel)}</span><span>&#9749;</span></button>`}
+    <section class="contact-page" aria-labelledby="contact-title">
+      <div class="shell contact-intro">
+        <p class="section-number">05 / Contact</p>
+        <div class="contact-intro-copy">
+          <h1 id="contact-title">Say hello.</h1>
+          <p>Tell me what you are working on, what you are curious about, or the specific question that brought you here. A few clear sentences are enough.</p>
         </div>
       </div>
-      <aside class="contact-aside"><blockquote>Good conversations usually start with a specific question.</blockquote><p>I am based in ${escapeHtml(site.location)}. Please do not use this page for sales automation or generic recruitment blasts.</p></aside>
+
+      <div class="shell contact-grid">
+        <div class="contact-form-panel">
+          <form class="contact-form" action="${escapeHtml(contactFormAction)}" method="post"${contactFormEncoding} data-contact-form data-form-endpoint="${escapeHtml(contactFormEndpoint)}" data-fallback-email="${escapeHtml(contactEmail)}">
+            <input type="hidden" name="subject" value="${escapeHtml(contactFormSubject)}">
+            <div class="contact-honeypot" aria-hidden="true">
+              <label for="contact-company">Leave this field empty</label>
+              <input id="contact-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-field">
+              <label for="contact-name">Your name</label>
+              <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" placeholder="How should I address you?" required>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-field form-field-message">
+              <div class="field-heading">
+                <label for="contact-message">Message</label>
+                <span><span data-message-count>0</span> / 3000</span>
+              </div>
+              <textarea id="contact-message" name="message" rows="7" minlength="20" maxlength="3000" aria-describedby="contact-message-hint" placeholder="What would you like to talk about?" required></textarea>
+              <p class="field-hint" id="contact-message-hint">Please do not include confidential information.</p>
+            </div>
+
+            <div class="contact-form-actions">
+              <button class="button contact-submit" type="submit"><span data-submit-label>${contactSubmitLabel}</span><span aria-hidden="true">&rarr;</span></button>
+              <p class="contact-privacy">Your details will only be used to respond to this message.</p>
+            </div>
+            <p class="form-status" data-form-status role="status" aria-live="polite" tabindex="-1"></p>
+          </form>
+        </div>
+
+        <aside class="contact-aside">
+          <blockquote>Good conversations usually start with a specific question.</blockquote>
+          <div class="contact-aside-copy">
+            <p>I am based in ${escapeHtml(site.location)}. Prefer another route?</p>
+            <div class="contact-links">
+              <a href="mailto:${escapeHtml(contactEmail)}"><span>Email directly</span><span>Open email &nearr;</span></a>
+              <a href="${escapeHtml(site.linkedin)}" target="_blank" rel="noreferrer"><span>LinkedIn</span><span>Open profile &nearr;</span></a>
+            </div>
+            <p class="contact-boundary">No automated sales or bulk outreach, please.</p>
+          </div>
+        </aside>
+      </div>
     </section>
     ${footer()}
   </main>`;

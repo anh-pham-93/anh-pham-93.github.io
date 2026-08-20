@@ -44,7 +44,8 @@
       .career-block,
       .case-hero-grid,
       .case-grid,
-      .contact-layout { grid-template-columns: 1fr; }
+      .contact-intro,
+      .contact-grid { grid-template-columns: 1fr; }
       .facts-grid { grid-template-columns: repeat(2, 1fr); }
       .fact:nth-child(2) { border-right: 0; }
       .fact:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
@@ -59,7 +60,14 @@
       .hobby-card.size-wide,
       .hobby-card.size-small { grid-column: 1 / -1; grid-row: auto; }
       .case-aside { position: static; }
-      .contact-aside { min-height: 55svh; }
+      .contact-intro { gap: 20px; }
+      .contact-intro .section-number { margin-top: 0; }
+      .contact-aside {
+        min-height: 0;
+        border-top: 1px solid var(--rule-strong);
+        border-left: 0;
+      }
+      .contact-aside blockquote { margin-bottom: 56px; }
       .footer-inner { grid-template-columns: 1fr; gap: 26px; }
     }
 
@@ -91,8 +99,15 @@
       .hobby-grid { grid-template-columns: 1fr; }
       .hobby-card { min-height: 360px; padding: 24px; }
       .hobby-card.size-feature { min-height: 520px; }
-      .contact-copy { padding: 94px 20px 70px; }
-      .contact-aside { padding: 52px 20px; }
+      .contact-page { padding: 68px 0 76px; }
+      .contact-intro { margin-bottom: 42px; }
+      .contact-intro h1 { font-size: clamp(60px, 18vw, 82px); }
+      .contact-form-panel,
+      .contact-aside { padding: 30px 22px; }
+      .contact-form-actions { grid-template-columns: 1fr; }
+      .contact-submit { width: 100%; }
+      .contact-links a { grid-template-columns: 1fr; gap: 4px; }
+      .contact-links a > span:last-child { text-align: left; }
       .case-hero { padding-top: 70px; }
       .case-title { font-size: clamp(50px, 14vw, 76px); }
       .dialog { padding: 24px; }

@@ -37,7 +37,7 @@ function footer() {
     <div class="shell footer-inner">
       <div><p class="footer-name">${escapeHtml(site.name)}</p><p>Product, writing and interests.</p></div>
       <div class="footer-links">
-        <a href="mailto:${escapeHtml(site.email)}">Email</a>
+        <a href="${url('/contact/')}">Send a note</a>
         <a href="${escapeHtml(site.linkedin)}" target="_blank" rel="noreferrer">LinkedIn</a>
         ${coffeeControl()}
       </div>
