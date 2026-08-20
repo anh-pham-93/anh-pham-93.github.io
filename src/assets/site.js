@@ -19,6 +19,112 @@
     nav.addEventListener('click', closeMenu);
   }
 
+  const contactForm = document.querySelector('[data-contact-form]');
+  if (contactForm instanceof HTMLFormElement) {
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const submitLabel = contactForm.querySelector('[data-submit-label]');
+    const status = contactForm.querySelector('[data-form-status]');
+    const messageField = contactForm.querySelector('#contact-message');
+    const messageCount = contactForm.querySelector('[data-message-count]');
+    const defaultSubmitLabel = submitLabel?.textContent || 'Send note';
+
+    function updateMessageCount() {
+      if (!(messageField instanceof HTMLTextAreaElement) || !messageCount) return;
+      messageCount.textContent = String(messageField.value.length);
+    }
+
+    function setFormStatus(message, state = '') {
+      if (!status) return;
+      status.textContent = message;
+      if (state) status.dataset.state = state;
+      else delete status.dataset.state;
+    }
+
+    function setSubmitting(isSubmitting, label = 'Sending...') {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = isSubmitting;
+        submitButton.setAttribute('aria-busy', String(isSubmitting));
+      }
+      if (submitLabel) submitLabel.textContent = isSubmitting ? label : defaultSubmitLabel;
+    }
+
+    updateMessageCount();
+    messageField?.addEventListener('input', updateMessageCount);
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const endpoint = contactForm.dataset.formEndpoint?.trim() || '';
+      const fallbackEmail = contactForm.dataset.fallbackEmail?.trim() || '';
+      const name = String(formData.get('name') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const message = String(formData.get('message') || '').trim();
+      const honeypot = String(formData.get('_gotcha') || '').trim();
+
+      if (honeypot) {
+        contactForm.reset();
+        updateMessageCount();
+        setFormStatus('Message sent. Thanks - it is now in my inbox.', 'success');
+        status?.focus();
+        return;
+      }
+
+      if (!endpoint) {
+        if (!fallbackEmail) {
+          setFormStatus('This form is not configured yet. Please use the LinkedIn link beside it.', 'error');
+          status?.focus();
+          return;
+        }
+        const subject = `Message from ${name || 'a visitor to anhpham.me'}`;
+        const body = `Name: ${name}
+Email: ${email}
+
+${message}`;
+        setFormStatus('Opening your email app with this message filled in...', 'sending');
+        window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      setSubmitting(true);
+      setFormStatus('Sending your message...', 'sending');
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) {
+          let errorMessage = response.status === 429
+            ? 'Too many messages were sent recently. Please wait a moment and try again.'
+            : 'That did not go through. Please try again or use the direct email link beside the form.';
+          const responseData = await response.json().catch(() => null);
+          if (responseData?.errors?.length) {
+            const details = responseData.errors.map((item) => item.message).filter(Boolean).join(' ');
+            if (details) errorMessage = details;
+          }
+          throw new Error(errorMessage);
+        }
+
+        contactForm.reset();
+        updateMessageCount();
+        setFormStatus('Message sent. Thanks - it is now in my inbox.', 'success');
+        status?.focus();
+      } catch (error) {
+        setFormStatus(
+          error instanceof Error && error.message
+            ? error.message
+            : 'That did not go through. Please try again or use the direct email link beside the form.',
+          'error'
+        );
+        status?.focus();
+      } finally {
+        setSubmitting(false);
+      }
+    });
+  }
+
   const dialogBackdrop = document.getElementById('dialog-backdrop');
   const dialogTitle = document.getElementById('dialog-title');
   const dialogCopy = document.getElementById('dialog-copy');
