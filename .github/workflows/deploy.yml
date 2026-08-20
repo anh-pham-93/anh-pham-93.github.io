@@ -32,7 +32,7 @@ jobs:
 
       - name: Build site
         env:
-          SITE_URL: ${{ vars.SITE_URL }}
+          SITE_URL: https://anhpham.me
         run: npm run build
 
       - name: Upload GitHub Pages artifact
