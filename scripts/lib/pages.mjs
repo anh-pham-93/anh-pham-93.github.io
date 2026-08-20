@@ -19,7 +19,6 @@ function aboutPage() {
             <span class="hero-start">${escapeHtml(role.area)} &middot; ${escapeHtml(role.status)}</span>
           </div>
         </div>
-        <a class="scroll-cue" href="#about-intro"><span aria-hidden="true">&darr;</span><span>Scroll to explore</span></a>
       </div>
     </section>
 
