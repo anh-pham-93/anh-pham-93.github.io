@@ -7,7 +7,7 @@ function aboutPage() {
   <main id="main-content" class="page-main">
     <section class="parallax-stage" id="parallax-stage" aria-labelledby="about-hero-title">
       <div class="parallax-sticky">
-        <div class="parallax-media" aria-hidden="true"><img src="${asset('about-hero.webp')}" alt=""></div>
+        <div class="parallax-media" aria-hidden="true"><img src="${asset('about-hero-sunrise.jpeg')}" alt=""></div>
         <div class="parallax-shade" aria-hidden="true"></div>
         <div class="parallax-noise" aria-hidden="true"></div>
         <div class="hero-copy">
