@@ -26,7 +26,7 @@
       height: 100%;
       object-fit: cover;
       object-position: 50% 51%;
-      filter: grayscale(1) contrast(1.12) brightness(.73);
+      filter: saturate(.58) contrast(1.08) brightness(.72);
     }
     .parallax-shade {
       z-index: 1;
