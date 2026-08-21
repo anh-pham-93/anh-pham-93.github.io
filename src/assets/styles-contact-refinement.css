@@ -1,0 +1,34 @@
+/* Contact form refinement: keep inputs functional and quiet so the editorial
+   hierarchy lives in the page heading and supporting quote, not placeholders. */
+.contact-form input,
+.contact-form textarea {
+  font-family: var(--sans);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.45;
+}
+
+.contact-form input {
+  min-height: 58px;
+}
+
+.contact-form textarea {
+  line-height: 1.65;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: color-mix(in srgb, var(--muted) 60%, transparent);
+  opacity: 1;
+}
+
+/* The visible label already says "Your name", so a second instruction is noise. */
+#contact-name::placeholder {
+  color: transparent;
+}
+
+@media (max-width: 620px) {
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 18px;
+  }
+}
