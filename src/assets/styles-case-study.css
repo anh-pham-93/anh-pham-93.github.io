@@ -1,0 +1,90 @@
+/* Case-study editorial refinement */
+.case-content {
+  padding-top: clamp(54px, 7vw, 82px);
+}
+
+.case-grid {
+  display: block;
+}
+
+.case-aside {
+  display: none;
+}
+
+.case-body {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.case-body section {
+  padding-bottom: clamp(44px, 6vw, 64px);
+  margin-bottom: clamp(44px, 6vw, 64px);
+}
+
+.case-body p,
+.case-body li {
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+/* The current renderer treats the opening impact line as the first section title.
+   Make it supporting evidence rather than the page headline. */
+.case-body section:first-child {
+  max-width: none;
+  margin: 0 0 clamp(58px, 8vw, 88px);
+  padding: 0 0 clamp(36px, 5vw, 50px);
+  border-bottom: 1px solid var(--ink);
+}
+
+.case-body section:first-child::before {
+  content: "Impact";
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 790;
+  line-height: 1.2;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.case-body section:first-child h2 {
+  max-width: 720px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.4vw, 42px);
+  font-weight: 430;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+.case-hero-grid {
+  grid-template-columns: minmax(190px, .3fr) minmax(0, 1fr);
+  gap: clamp(48px, 7vw, 100px);
+}
+
+.case-title {
+  max-width: 1040px;
+}
+
+.case-deck {
+  max-width: 690px;
+}
+
+@media (max-width: 940px) {
+  .case-body {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 620px) {
+  .case-body p,
+  .case-body li {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .case-body section:first-child h2 {
+    font-size: 28px;
+  }
+}
