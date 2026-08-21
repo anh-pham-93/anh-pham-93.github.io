@@ -1,0 +1,110 @@
+/* Case-study editorial refinement */
+.case-content {
+  padding-top: clamp(54px, 7vw, 82px);
+}
+
+.case-grid {
+  display: block;
+}
+
+.case-aside {
+  display: none;
+}
+
+.case-body {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.case-body section {
+  padding-bottom: clamp(44px, 6vw, 64px);
+  margin-bottom: clamp(44px, 6vw, 64px);
+}
+
+.case-body p,
+.case-body li {
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+.case-body section:first-child {
+  max-width: none;
+  margin: 0 calc((min(var(--shell), 100vw) - 780px) / -2) clamp(58px, 8vw, 88px);
+  padding: 0 0 clamp(42px, 5vw, 58px);
+  border-bottom: 1px solid var(--ink);
+}
+
+.case-body section:first-child h2 {
+  margin-bottom: 24px;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 790;
+  line-height: 1.2;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.case-body section:first-child ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 5vw, 72px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.case-body section:first-child li {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.case-body section:first-child li strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(46px, 5.8vw, 78px);
+  font-weight: 430;
+  line-height: .92;
+  letter-spacing: -.05em;
+}
+
+@media (max-width: 940px) {
+  .case-body {
+    max-width: 700px;
+  }
+
+  .case-body section:first-child {
+    margin-inline: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .case-body p,
+  .case-body li {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .case-body section:first-child ul {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .case-body section:first-child li {
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .case-body section:first-child li:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .case-body section:first-child li strong {
+    font-size: 52px;
+  }
+}
