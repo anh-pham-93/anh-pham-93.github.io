@@ -2,10 +2,10 @@
 title: The biggest growth opportunity was sitting in the product next door
 slug: lumin-sign
 company: Lumin
-period: 2024—2026
+period: 2025—2026
 role: Product Owner, Lumin Sign
 kicker: Product strategy & growth
-meta1: 2024—2026
+meta1: 2025—2026
 meta2: Lumin Sign
 summary: How we turned an existing signing behaviour inside a high-traffic PDF editor into a secure signing workflow without forcing users into another product.
 order: 1
