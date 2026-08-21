@@ -1,4 +1,7 @@
 (() => {
+  const TURNSTILE_SITE_KEY = '0x4AAAAAAEXTc3f55Ww5Vs0y';
+  const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
   const menuButton = document.querySelector('.menu-button');
   const nav = document.getElementById('site-nav');
 
@@ -26,7 +29,9 @@
     const status = contactForm.querySelector('[data-form-status]');
     const messageField = contactForm.querySelector('#contact-message');
     const messageCount = contactForm.querySelector('[data-message-count]');
+    const actions = contactForm.querySelector('.contact-form-actions');
     const defaultSubmitLabel = submitLabel?.textContent || 'Send note';
+    let turnstileWidgetId = null;
 
     function updateMessageCount() {
       if (!(messageField instanceof HTMLTextAreaElement) || !messageCount) return;
@@ -48,8 +53,48 @@
       if (submitLabel) submitLabel.textContent = isSubmitting ? label : defaultSubmitLabel;
     }
 
+    function resetTurnstile() {
+      if (turnstileWidgetId === null || !window.turnstile) return;
+      window.turnstile.reset(turnstileWidgetId);
+    }
+
+    function renderTurnstile() {
+      if (!window.turnstile || !actions || turnstileWidgetId !== null) return;
+      const container = document.createElement('div');
+      container.className = 'contact-turnstile';
+      actions.before(container);
+      turnstileWidgetId = window.turnstile.render(container, {
+        sitekey: TURNSTILE_SITE_KEY,
+        appearance: 'interaction-only',
+        theme: 'light',
+        size: 'flexible',
+        'error-callback': () => {
+          setFormStatus('Verification could not load. Please refresh the page or use the direct email link.', 'error');
+        }
+      });
+    }
+
+    function loadTurnstile() {
+      if (window.turnstile) {
+        renderTurnstile();
+        return;
+      }
+      const existing = document.querySelector(`script[src="${TURNSTILE_SCRIPT_URL}"]`);
+      if (existing) {
+        existing.addEventListener('load', renderTurnstile, { once: true });
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = TURNSTILE_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      script.addEventListener('load', renderTurnstile, { once: true });
+      document.head.appendChild(script);
+    }
+
     updateMessageCount();
     messageField?.addEventListener('input', updateMessageCount);
+    loadTurnstile();
 
     contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -60,6 +105,7 @@
       const email = String(formData.get('email') || '').trim();
       const message = String(formData.get('message') || '').trim();
       const honeypot = String(formData.get('_gotcha') || '').trim();
+      const turnstileToken = String(formData.get('cf-turnstile-response') || '').trim();
 
       if (honeypot) {
         contactForm.reset();
@@ -76,12 +122,15 @@
           return;
         }
         const subject = `Message from ${name || 'a visitor to anhpham.me'}`;
-        const body = `Name: ${name}
-Email: ${email}
-
-${message}`;
+        const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
         setFormStatus('Opening your email app with this message filled in...', 'sending');
         window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      if (!turnstileToken) {
+        setFormStatus('Please wait a moment for the security check to finish, then try again.', 'error');
+        status?.focus();
         return;
       }
 
@@ -100,7 +149,8 @@ ${message}`;
             ? 'Too many messages were sent recently. Please wait a moment and try again.'
             : 'That did not go through. Please try again or use the direct email link beside the form.';
           const responseData = await response.json().catch(() => null);
-          if (responseData?.errors?.length) {
+          if (responseData?.error) errorMessage = responseData.error;
+          else if (responseData?.errors?.length) {
             const details = responseData.errors.map((item) => item.message).filter(Boolean).join(' ');
             if (details) errorMessage = details;
           }
@@ -121,6 +171,7 @@ ${message}`;
         status?.focus();
       } finally {
         setSubmitting(false);
+        resetTurnstile();
       }
     });
   }
