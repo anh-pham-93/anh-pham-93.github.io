@@ -12,7 +12,13 @@ order: 1
 published: true
 status: Case study
 ---
-**~3× monthly volume from the channel within two months of launch · ~2× total product volume · 3 squads coordinated across product boundaries**
+## Impact
+
+- **~3×** monthly channel volume within two months of launch
+- **~2×** total product volume
+- **3 squads** coordinated across product boundaries
+
+## The problem wasn't conversion
 
 For a long time, we treated one of our biggest growth problems as a conversion problem.
 
