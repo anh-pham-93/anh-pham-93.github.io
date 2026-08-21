@@ -26,6 +26,11 @@
   color: transparent;
 }
 
+.contact-turnstile {
+  min-height: 1px;
+  margin-bottom: 18px;
+}
+
 @media (max-width: 620px) {
   .contact-form input,
   .contact-form textarea {
