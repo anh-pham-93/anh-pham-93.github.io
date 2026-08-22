@@ -28,12 +28,12 @@ function aboutPage() {
           <div class="about-lead-grid">
             <div>
               <p class="section-number">04 / About</p>
-              <h2 class="about-heading">A little more context.</h2>
+              <h2 class="about-heading">A little bit more about me.</h2>
             </div>
             <div class="about-copy">
               <p class="lead">I started in energy and offshore project delivery, moved through retail compliance and localisation, and eventually found my way into digital product work.</p>
-              <p>The common thread is less tidy than a polished career narrative: I enjoy understanding complicated systems, working across different groups, and making decisions when the answer is not obvious.</p>
-              <p>Outside work, I translate books from English to Vietnamese, read, run, and keep finding new interests to add to the list.</p>
+              <p>It doesn't look coherent on the surface, but underneath it: I enjoy understanding complicated systems, working across different groups, and making decisions when the answer is not obvious.</p>
+              <p>Outside work, I translate books from English to Vietnamese (been doing that for 8 years), read (big fan of Haruki Murakami), run (or at least try to), and play games with my daughter on our Switch 2 (we're both huge fans of Pokemon).</p>
               <div class="hero-actions">
                 <a class="button" href="${url('/work/')}">See my work <span aria-hidden="true">&rarr;</span></a>
                 <a class="text-link" href="${url('/contact/')}">Say hello <span aria-hidden="true">&rarr;</span></a>
@@ -43,15 +43,15 @@ function aboutPage() {
 
           <div class="facts-grid" aria-label="A few facts about Anh">
             <article class="fact"><p class="fact-label">${escapeHtml(role.statusLabel)}</p><strong>${escapeHtml(role.company)}</strong><p>${escapeHtml(role.title)}, ${escapeHtml(role.area)}.</p></article>
-            <article class="fact"><p class="fact-label">Based in</p><strong>Auckland</strong><p>New Zealand.</p></article>
+            <article class="fact"><p class="fact-label">Location</p><strong>Auckland</strong><p>New Zealand.</p></article>
             <article class="fact"><p class="fact-label">Translation</p><strong>9 books</strong><p>Published English-to-Vietnamese titles.</p></article>
-            <article class="fact"><p class="fact-label">Current habit</p><strong>Running</strong><p>Slowly and repeatedly.</p></article>
+            <article class="fact"><p class="fact-label">Current habit</p><strong>Running</strong><p>Embarrassingly slow and steady.</p></article>
           </div>
 
           <div class="link-panels" aria-label="Explore the site">
-            <a class="link-panel" href="${url('/work/')}"><span class="symbol" aria-hidden="true">&nearr;</span><h3>Work</h3><p>Selected product work and a non-linear career path.</p><span class="arrow" aria-hidden="true">&rarr;</span></a>
-            <a class="link-panel" href="${url('/writing/')}"><span class="symbol" aria-hidden="true">&#9998;</span><h3>Writing</h3><p>Essays, notes, reviews, and whatever becomes worth finishing.</p><span class="arrow" aria-hidden="true">&rarr;</span></a>
-            <a class="link-panel" href="${url('/hobbies/')}"><span class="symbol" aria-hidden="true">&#9671;</span><h3>Hobbies</h3><p>Translation, reading, running, and future curiosities.</p><span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="link-panel" href="${url('/work/')}"><span class="symbol" aria-hidden="true">&nearr;</span><h3>Work</h3><p>My current role and what I've done in the past.</p><span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="link-panel" href="${url('/writing/')}"><span class="symbol" aria-hidden="true">&#9998;</span><h3>Writing</h3><p>Where I jot down my thoughts about random topics.</p><span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="link-panel" href="${url('/hobbies/')}"><span class="symbol" aria-hidden="true">&#9671;</span><h3>Hobbies</h3><p>What I do to wind down, have a look if you're curious.</p><span class="arrow" aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
       </section>
