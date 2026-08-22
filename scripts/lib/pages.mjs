@@ -81,7 +81,7 @@ function workPage(workItems) {
           <p class="section-number">01 / Work</p>
           <div><h1>Selected product work</h1><p>A first look at the product problems and systems I have been responsible for. Detailed case studies will only include information that is safe and useful to publish.</p></div>
         </div>
-        <div class="next-chapter"><span class="label">${escapeHtml(role.statusLabel)} chapter</span><strong>${escapeHtml(role.title)} &middot; ${escapeHtml(role.area)} at ${escapeHtml(role.company)}</strong><span>${escapeHtml(role.status)}</span></div>
+        <div class="next-chapter"><span class="label">${escapeHtml(role.statusLabel)}</span><strong>${escapeHtml(role.title)} &middot; ${escapeHtml(role.area)} at ${escapeHtml(role.company)}</strong><span>${escapeHtml(role.status)}</span></div>
         <div class="work-list">${workRows}</div>
         <section class="career-block" aria-labelledby="career-title">
           <div class="career-intro"><p class="section-number">Career path</p><h2 id="career-title">Not a straight line &mdash; and better for it.</h2><p>My work has moved through energy-market development, offshore project delivery, retail compliance and digital products. Each role changed how I understand systems, risk and collaboration.</p></div>
