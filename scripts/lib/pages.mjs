@@ -225,13 +225,17 @@ function contactPage() {
 
 function casePage(entry) {
   const { data, body } = entry;
+  const isFinished = data.status === 'Case study';
+  const caseStatusNote = isFinished
+    ? ''
+    : '<p>The structure is publishable. Detailed narrative, visuals and sensitive metrics still need a review before you treat this as a finished case study.</p>';
   const content = `
   <main id="main-content" class="case-main">
     <section class="case-hero"><div class="shell">
       <div class="case-back"><a class="text-link" href="${url('/work/')}">&larr; Back to work</a></div>
       <div class="case-hero-grid"><aside class="case-meta"><p class="case-eyebrow">${escapeHtml(data.kicker || 'Case study')}</p><dl><div><dt>Company</dt><dd>${escapeHtml(data.company)}</dd></div><div><dt>Period</dt><dd>${escapeHtml(data.period)}</dd></div><div><dt>Role</dt><dd>${escapeHtml(data.role)}</dd></div></dl></aside><div><h1 class="case-title">${escapeHtml(data.title)}</h1><p class="case-deck">${escapeHtml(data.summary)}</p></div></div>
     </div></section>
-    <section class="case-content"><div class="shell case-grid"><aside class="case-aside"><div class="case-status"><strong>${escapeHtml(data.status || 'Case study outline')}</strong><p>The structure is publishable. Detailed narrative, visuals and sensitive metrics still need a review before you treat this as a finished case study.</p></div></aside><div class="case-body">${renderCaseSections(body)}</div></div></section>
+    <section class="case-content"><div class="shell case-grid"><aside class="case-aside"><div class="case-status"><strong>${escapeHtml(data.status || 'Case study outline')}</strong>${caseStatusNote}</div></aside><div class="case-body">${renderCaseSections(body)}</div></div></section>
     ${footer()}
   </main>`;
   return layout({ title: data.title, description: data.summary, current: 'work', content, route: `/work/${data.slug}/` });
