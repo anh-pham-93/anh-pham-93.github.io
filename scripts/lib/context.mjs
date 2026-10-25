@@ -129,7 +129,12 @@ function renderBlocks(body = '') {
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
-    output.push(`<p>${renderInline(paragraph.join(' '))}</p>`);
+    const html = paragraph.map((line, index) => {
+      const rendered = renderInline(line.text);
+      if (index === paragraph.length - 1) return rendered;
+      return `${rendered}${line.hardBreak ? '<br>' : ' '}`;
+    }).join('');
+    output.push(`<p>${html}</p>`);
     paragraph = [];
   };
   const flushList = () => {
@@ -176,7 +181,7 @@ function renderBlocks(body = '') {
       output.push('<hr>');
       continue;
     }
-    paragraph.push(trimmed);
+    paragraph.push({ text: trimmed, hardBreak: / {2,}$/.test(line) });
   }
   flushParagraph();
   flushList();
